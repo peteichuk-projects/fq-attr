@@ -78,7 +78,7 @@ style && style.remove();
     var attr = document.getElementById('qaAttrs').value;
 
     var css = `
-    .fq {border: 1px solid yellow;}
+    .fq {box-shadow: 0 0 2px 0 yellow;;}
     .fq input {
       display: none;
       border: none;
