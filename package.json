@@ -1,0 +1,24 @@
+{
+  "name": "fq-attr",
+  "version": "1.0.0",
+  "description": "Find QA attributes on page",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/peteichuk-projects/fq-attr.git"
+  },
+  "keywords": [
+    "Find",
+    "QA",
+    "attributes"
+  ],
+  "author": "Peteichuk",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/peteichuk-projects/fq-attr/issues"
+  },
+  "homepage": "https://github.com/peteichuk-projects/fq-attr#readme"
+}
