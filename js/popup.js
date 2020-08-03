@@ -78,7 +78,7 @@ style && style.remove();
     var attr = document.getElementById('qaAttrs').value;
 
     var css = `
-    .fq {box-shadow: 0 0 2px 0 yellow;;}
+    .fq {box-shadow: 0 0 3px 1px yellow;}
     .fq input {
       display: none;
       border: none;
@@ -87,7 +87,7 @@ style && style.remove();
       box-shadow: 0 0 4px 0 rgba(0,0,0,.2);
       padding: 2px;
       z-index: 999;
-      cursor: pointer;
+      cursor: copy;
     }
     .fq div[data-fqel] {
       position: relative;
