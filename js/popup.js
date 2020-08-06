@@ -98,8 +98,7 @@ style && style.remove();
       position: relative;
       z-index: 999;
     }
-    .fq:hover div[data-fqel] {display: block;}
-    .fqparent:hover div[data-fqel] {display: block;}
+    .fq:hover >div[data-fqel], .fqparent:hover >div[data-fqel] {display: block;}
     `;
 
     var script = `
@@ -109,12 +108,12 @@ style && style.remove();
       elements.forEach(function (el) {
         el.dataset.fq = '';
         el.classList.add('fq');
-        if (el.innerText || (el.innerHTML && /\w/gm.test(el.innerHTML))) {
+        if (el.innerText || (el.innerHTML && /\\w/gm.test(el.innerHTML))) {
           el.appendChild(createNode(el, '${attr}'));
-          return;
+        } else {
+          el.parentNode.classList.add('fqparent');
+          el.parentNode.appendChild(createNode(el, '${attr}'));
         }
-        el.parentNode.classList.add('fqparent');
-        el.parentNode.appendChild(createNode(el, '${attr}'));
       });
       
       var style = document.createElement('style');
