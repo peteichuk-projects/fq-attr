@@ -31,6 +31,7 @@ var cssToastr = `
 var clearScript = `
 var head = document.querySelector('head') || document.body;
 var elements = document.querySelectorAll('*[data-fq]');
+var parentElements = document.querySelectorAll('.fqparent');
 var elementsTooltip = document.querySelectorAll('*[data-fqel]');
 var style = head.querySelector('style[data-fqstyle]');
 
@@ -41,6 +42,10 @@ elements.forEach(function (el) {
 
 elementsTooltip.forEach(function (el) {
   el.remove();
+});
+
+parentElements.forEach(function (el) {
+  el.classList.remove('fqparent');
 });
 
 style && style.remove();
@@ -79,8 +84,7 @@ style && style.remove();
 
     var css = `
     .fq {box-shadow: 0 0 3px 1px yellow;}
-    .fq input {
-      display: none;
+    div[data-fqel] input {
       border: none;
       outline: none;
       background-color: white;
@@ -89,11 +93,13 @@ style && style.remove();
       z-index: 999;
       cursor: copy;
     }
-    .fq div[data-fqel] {
+    div[data-fqel] {
+      display: none;
       position: relative;
       z-index: 999;
     }
-    .fq:hover input {display: block;}
+    .fq:hover div[data-fqel] {display: block;}
+    .fqparent:hover div[data-fqel] {display: block;}
     `;
 
     var script = `
@@ -101,9 +107,14 @@ style && style.remove();
       var elements = document.querySelectorAll('*[${attr}]');
       
       elements.forEach(function (el) {
-        el.dataset.fq = ''
-        el.classList.add('fq')
-        el.appendChild(createNode(el, '${attr}'))
+        el.dataset.fq = '';
+        el.classList.add('fq');
+        if (el.innerText || (el.innerHTML && /\w/gm.test(el.innerHTML))) {
+          el.appendChild(createNode(el, '${attr}'));
+          return;
+        }
+        el.parentNode.classList.add('fqparent');
+        el.parentNode.appendChild(createNode(el, '${attr}'));
       });
       
       var style = document.createElement('style');
